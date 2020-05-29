@@ -8,15 +8,15 @@
   </div>
   <div>
     <form action="/new" method="post">
-    <label for="title">Title</label><br>
-    <input type="text" id="title" name="title"><br>
-    <input type="submit" value="Submit">
+    <label for="title">New Todo</label><br>
+    <input type="text" id="title" name="title"><br><br>
+    <input type="submit" value="Submit"><br><br>
   </form>
   </div>
   
   <div class="row">
     <div class="col-md-12">
-      <h2>Items</h2>
+      <h2>Todos</h2>
       <ul class="list-group mb-4">
         {% for todo in todos %}
         <li>
