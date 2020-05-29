@@ -10,20 +10,20 @@
     <form action="/new" method="post">
     <label for="title">New Todo</label><br>
     <input type="text" id="title" name="title"><br><br>
-    <input type="submit" value="Submit"><br><br>
+    <input type="submit" class="btn btn-primary" value="Submit"><br><br>
   </form>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-sm">
         <h2>Todos</h2>
-        <ul class="list-group mb-4">
+        <ul class="list-group mb-4 list-group-flush">
           {% for todo in todos %}
           {% if todo.status == "Not Started" %}
-          <li>
-            {{ todo.title }} - {{ todo.status  }}
+          <li class="list-group-item">
             <form action="/complete/{{ todo.id }}" method="post">
-              <input type="submit" value="Done!">
+              <label>{{ todo.title }}</label>
+              <input type="submit" class="btn btn-success" value="Done!">
             </form>
           </li>
           {% endif %}
@@ -33,13 +33,13 @@
       </div>
       <div class="col-sm">
         <h2>Todone</h2>
-        <ul class="list-group mb-4">
+        <ul class="list-group mb-4 list-group-flush">
           {% for todo in todos %}
           {% if todo.status == "Complete" %}
-          <li>
-            {{ todo.title }} - {{ todo.status  }}
+          <li class="list-group-item">
             <form action="/delete/{{ todo.id }}" method="post">
-              <input type="submit" value="Delete">
+              <label>{{ todo.title }}</label>
+              <input type="submit" class="btn btn-danger" value="Delete">
             </form>
           </li>
           {% endif %}
