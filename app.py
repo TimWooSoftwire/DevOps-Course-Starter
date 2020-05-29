@@ -6,7 +6,8 @@ app.config.from_object('flask_config.Config')
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    todos = session.get_items()
+    return render_template('index.html', todos=todos)
 
 if __name__ == '__main__':
     app.run()
