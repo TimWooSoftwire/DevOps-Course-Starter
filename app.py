@@ -23,5 +23,11 @@ def markascompletet(id):
     session.save_item(todo)
     return redirect('/')
 
+@app.route('/delete/<id>', methods=['POST'])
+def markascompleted(id):
+    todo = session.get_item(id)
+    session.del_item(todo)
+    return redirect('/')
+
 if __name__ == '__main__':
     app.run()

@@ -38,8 +38,8 @@
           {% if todo.status == "Complete" %}
           <li>
             {{ todo.title }} - {{ todo.status  }}
-            <form action="/complete/{{ todo.id }}" method="post">
-              <input type="submit" value="Done!">
+            <form action="/delete/{{ todo.id }}" method="post">
+              <input type="submit" value="Delete">
             </form>
           </li>
           {% endif %}
