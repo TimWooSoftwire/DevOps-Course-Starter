@@ -13,18 +13,41 @@
     <input type="submit" value="Submit"><br><br>
   </form>
   </div>
-  
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Todos</h2>
-      <ul class="list-group mb-4">
-        {% for todo in todos %}
-        <li>
-          {{ todo.title }}
-        </li>
-        {% endfor %}
-        <!-- List the todo items here -->
-      </ul>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <h2>Todos</h2>
+        <ul class="list-group mb-4">
+          {% for todo in todos %}
+          {% if todo.status == "Not Started" %}
+          <li>
+            {{ todo.title }} - {{ todo.status  }}
+            <form action="/complete/{{ todo.id }}" method="post">
+              <input type="submit" value="Done!">
+            </form>
+          </li>
+          {% endif %}
+          {% endfor %}
+          <!-- List the todo items here -->
+        </ul>
+      </div>
+      <div class="col-sm">
+        <h2>Todone</h2>
+        <ul class="list-group mb-4">
+          {% for todo in todos %}
+          {% if todo.status == "Complete" %}
+          <li>
+            {{ todo.title }} - {{ todo.status  }}
+            <form action="/complete/{{ todo.id }}" method="post">
+              <input type="submit" value="Done!">
+            </form>
+          </li>
+          {% endif %}
+          {% endfor %}
+          <!-- List the todo items here -->
+        </ul>
+      </div>
     </div>
+  </div>
   </div>
 {% endblock %}

@@ -16,5 +16,12 @@ def newtodo():
     session.add_item(title)
     return redirect('/')
 
+@app.route('/complete/<id>', methods=['POST'])
+def markascompletet(id):
+    todo = session.get_item(id)
+    todo['status'] = "Complete"
+    session.save_item(todo)
+    return redirect('/')
+
 if __name__ == '__main__':
     app.run()
