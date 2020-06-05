@@ -67,3 +67,17 @@ def save_item(item):
     session['items'] = updated_items
 
     return item
+
+def del_item(item):
+    """
+    Deletes an existing item in the session.
+
+    Args:
+        item: The item to delete.
+    """
+    todos = get_items()
+    updatedItems = [todo for todo in todos if todo['id'] != item['id']]
+
+    session['items'] = updatedItems
+
+   

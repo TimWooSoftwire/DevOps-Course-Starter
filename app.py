@@ -4,9 +4,30 @@ import session_items as session
 app = Flask(__name__)
 app.config.from_object('flask_config.Config')
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
-    return 'Hello World!'
+    todos = session.get_items()
+    return render_template('index.html', todos=todos)
+
+
+@app.route('/new', methods=['POST'])
+def newtodo():
+    title = request.form.get('title')
+    session.add_item(title)
+    return redirect('/')
+
+@app.route('/complete/<id>', methods=['POST'])
+def markascompletet(id):
+    todo = session.get_item(id)
+    todo['status'] = "Complete"
+    session.save_item(todo)
+    return redirect('/')
+
+@app.route('/delete/<id>', methods=['POST'])
+def markascompleted(id):
+    todo = session.get_item(id)
+    session.del_item(todo)
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run()
