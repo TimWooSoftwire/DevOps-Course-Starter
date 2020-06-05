@@ -5,19 +5,14 @@
   <div class="jumbotron">
     <h1 class="display-4">To-Do App</h1>
     <p class="lead">Tim's to-do app.</p>
-    <img src="https://ppaas.herokuapp.com/partyparrot/congaparrot?overlay=&overlayWidth=20&overlayHeight=20&overlayOffsetX=0&overlayOffsetY=0" style="width:120px;height:120px;" >
-    <img src="https://ppaas.herokuapp.com/partyparrot/congaparrot?overlay=&overlayWidth=20&overlayHeight=20&overlayOffsetX=0&overlayOffsetY=0" style="width:120px;height:120px;" >
-    <img src="https://ppaas.herokuapp.com/partyparrot/congaparrot?overlay=&overlayWidth=20&overlayHeight=20&overlayOffsetX=0&overlayOffsetY=0" style="width:120px;height:120px;" >
-    <img src="https://ppaas.herokuapp.com/partyparrot/congaparrot?overlay=&overlayWidth=20&overlayHeight=20&overlayOffsetX=0&overlayOffsetY=0" style="width:120px;height:120px;" >
-    <img src="https://ppaas.herokuapp.com/partyparrot/congaparrot?overlay=&overlayWidth=20&overlayHeight=20&overlayOffsetX=0&overlayOffsetY=0" style="width:120px;height:120px;" >
-    <img src="https://ppaas.herokuapp.com/partyparrot/congaparrot?overlay=&overlayWidth=20&overlayHeight=20&overlayOffsetX=0&overlayOffsetY=0" style="width:120px;height:120px;" >
-    <img src="https://ppaas.herokuapp.com/partyparrot/congaparrot?overlay=&overlayWidth=20&overlayHeight=20&overlayOffsetX=0&overlayOffsetY=0" style="width:120px;height:120px;" >
-    <img src="https://ppaas.herokuapp.com/partyparrot/congaparrot?overlay=&overlayWidth=20&overlayHeight=20&overlayOffsetX=0&overlayOffsetY=0" style="width:120px;height:120px;" >
+    {% for i in range(1,9,1) %}
+      <img src="https://ppaas.herokuapp.com/partyparrot/congaparrot?overlay=&overlayWidth=20&overlayHeight=20&overlayOffsetX=0&overlayOffsetY=0" style="width:120px;height:120px;" >
+    {% endfor %}
   </div>
   <div>
     <form action="/new" method="post">
     <label for="title">New Todo</label><br>
-    <input type="text" id="title" name="title"><br><br>
+    <input type="text" id="title" name="title" required><br><br>
     <input type="submit" class="btn btn-primary" value="Submit"><br><br>
   </form>
   </div>
@@ -27,14 +22,14 @@
         <h2>Todos</h2>
         <ul class="list-group mb-4 list-group-flush">
           {% for todo in todos %}
-          {% if todo.status == "Not Started" %}
-          <li class="list-group-item">
-            <form action="/complete/{{ todo.id }}" method="post">
-              <label>{{ todo.title }}</label>
-              <input type="submit" class="btn btn-success" value="Done!">
-            </form>
-          </li>
-          {% endif %}
+            {% if todo.status == "Not Started" %}
+              <li class="list-group-item">
+                <form action="/complete/{{ todo.id }}" method="post">
+                  <label>{{ todo.title }}</label>
+                  <input type="submit" class="btn btn-success" value="Done!">
+                </form>
+              </li>
+            {% endif %}
           {% endfor %}
           <!-- List the todo items here -->
         </ul>
