@@ -10,21 +10,19 @@ def index():
     todos = trello.get_items()
     return render_template('index.html', todos=todos)
 
-
 @app.route('/new', methods=['POST'])
-def newtodo():
+def new_todo():
     title = request.form.get('title')
     trello.add_item(title)
     return redirect('/')
 
 @app.route('/complete/<id>', methods=['POST'])
-def markascomplete(id):
+def mark_as_complete(id):
     trello.complete_item(id)
     return redirect('/')
 
 @app.route('/delete/<id>', methods=['POST'])
 def delete(id):
-    # todo = trello.get_item(id)
     trello.delete_item(id)
     return redirect('/')
 

@@ -15,7 +15,7 @@ def get_items():
     Returns:
         list: The list of saved items.
     """
-    r = requests.get(c._BASE_API_URL + "boards/" + c._BOARD_ID + "/cards", params=c._DEFAULT_PAYLOAD)
+    r = requests.get(c.BASE_API_URL + "boards/" + c.BOARD_ID + "/cards", params=c.DEFAULT_PAYLOAD)
     return parse_cards(r)
 
 def parse_cards(raw_request):
@@ -31,17 +31,17 @@ def parse_card(card):
     # return {'id': card['id'], 'status': list_id_to_list_friendly_name(card['idList']), 'title': card['name']}
 
 def add_item(name):
-    request_payload = {**c._DEFAULT_PAYLOAD, **{'idList': c._TODO_LIST_ID, 'name': name}} # ** is weird dictionary concat syntax
-    requests.post(c._BASE_API_URL + "cards", params=request_payload) 
+    request_payload = {**c.DEFAULT_PAYLOAD, **{'idList': c.TODO_LIST_ID, 'name': name}} # ** is weird dictionary concat syntax
+    requests.post(c.BASE_API_URL + "cards", params=request_payload) 
     return name
 
 def delete_item(id):
-    requests.delete(c._BASE_API_URL + "cards/" + id, params = c._DEFAULT_PAYLOAD)
+    requests.delete(c.BASE_API_URL + "cards/" + id, params = c.DEFAULT_PAYLOAD)
     return id
 
 def complete_item(id):
-    request_payload = {**c._DEFAULT_PAYLOAD, **{'idList': c._DONE_LIST_ID}}
-    requests.put(c._BASE_API_URL + "cards/" + id, params=request_payload) 
+    request_payload = {**c.DEFAULT_PAYLOAD, **{'idList': c.DONE_LIST_ID}}
+    requests.put(c.BASE_API_URL + "cards/" + id, params=request_payload) 
     return id
 
 

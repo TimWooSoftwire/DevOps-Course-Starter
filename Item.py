@@ -7,7 +7,7 @@ class Item:
         self.name = name
 
 def list_id_to_list_friendly_name(list_id):
-    if list_id == constants._TODO_LIST_ID:
+    if list_id == constants.TODO_LIST_ID:
         return "Not Started"
-    if list_id == constants._DONE_LIST_ID:
+    if list_id == constants.DONE_LIST_ID:
         return "Complete"
