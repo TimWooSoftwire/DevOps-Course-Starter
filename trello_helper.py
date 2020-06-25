@@ -39,3 +39,10 @@ def list_id_to_list_friendly_name(list_id):
     if list_id == _DONE_LIST_ID:
         return "Complete"
 
+def add_item(name):
+    request_payload = {**_DEFAULT_PAYLOAD, **{'idList': _TODO_LIST_ID, 'name': name}} # ** is weird dictionary concat syntax
+    requests.post(_BASE_API_URL + "cards", params=request_payload) 
+    return name
+
+
+

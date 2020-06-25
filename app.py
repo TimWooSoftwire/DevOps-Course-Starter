@@ -14,7 +14,7 @@ def index():
 @app.route('/new', methods=['POST'])
 def newtodo():
     title = request.form.get('title')
-    session.add_item(title)
+    trello.add_item(title)
     return redirect('/')
 
 @app.route('/complete/<id>', methods=['POST'])
