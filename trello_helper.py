@@ -44,5 +44,13 @@ def add_item(name):
     requests.post(_BASE_API_URL + "cards", params=request_payload) 
     return name
 
+def delete_item(id):
+    requests.delete(_BASE_API_URL + "cards/" + id, params = _DEFAULT_PAYLOAD)
+    return id
+
+def complete_item(id):
+    request_payload = {**_DEFAULT_PAYLOAD, **{'idList': _DONE_LIST_ID}}
+    requests.put(_BASE_API_URL + "cards/" + id, params=request_payload) 
+    return id
 
 

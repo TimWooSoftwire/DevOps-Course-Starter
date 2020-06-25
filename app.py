@@ -18,16 +18,14 @@ def newtodo():
     return redirect('/')
 
 @app.route('/complete/<id>', methods=['POST'])
-def markascompletet(id):
-    todo = session.get_item(id)
-    todo['status'] = "Complete"
-    session.save_item(todo)
+def markascomplete(id):
+    trello.complete_item(id)
     return redirect('/')
 
 @app.route('/delete/<id>', methods=['POST'])
-def markascompleted(id):
-    todo = session.get_item(id)
-    session.del_item(todo)
+def delete(id):
+    # todo = trello.get_item(id)
+    trello.delete_item(id)
     return redirect('/')
 
 if __name__ == '__main__':
