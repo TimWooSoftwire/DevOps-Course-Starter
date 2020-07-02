@@ -29,3 +29,7 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+## Secrets
+
+Secrets (a trello API key and Token) are stored in a secrets.py file, and not checked in to git.  
