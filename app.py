@@ -1,32 +1,27 @@
 from flask import Flask, render_template, request, redirect, url_for
-import session_items as session
+from trello_helper import TrelloAPI as trello
 
 app = Flask(__name__)
-app.config.from_object('flask_config.Config')
 
 @app.route('/', methods=['GET'])
 def index():
-    todos = session.get_items()
+    todos = trello.get_items()
     return render_template('index.html', todos=todos)
 
-
 @app.route('/new', methods=['POST'])
-def newtodo():
+def new_todo():
     title = request.form.get('title')
-    session.add_item(title)
+    trello.add_item(title)
     return redirect('/')
 
 @app.route('/complete/<id>', methods=['POST'])
-def markascompletet(id):
-    todo = session.get_item(id)
-    todo['status'] = "Complete"
-    session.save_item(todo)
+def mark_as_complete(id):
+    trello.complete_item(id)
     return redirect('/')
 
 @app.route('/delete/<id>', methods=['POST'])
-def markascompleted(id):
-    todo = session.get_item(id)
-    session.del_item(todo)
+def delete(id):
+    trello.delete_item(id)
     return redirect('/')
 
 if __name__ == '__main__':
