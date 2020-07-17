@@ -1,5 +1,7 @@
 import sys
 import pytest
+from datetime import datetime
+
 del sys.path[0]
 sys.path.insert(0, 'C:/Users/TimWoo/Work/Training/DevOpsApprenticeship/ProjectExercise/DevOps-Course-Starter')
 from view_model import ViewModel
@@ -8,9 +10,9 @@ import constants
 
 @pytest.fixture
 def example_board():
-    todo_item = TodoItem(1, constants.TODO_LIST_ID, "Item not started")
-    doing_item = TodoItem(2, constants.DOING_LIST_ID, "Item in progress")
-    done_item = TodoItem(3, constants.DONE_LIST_ID, "Completed Item!")
+    todo_item = TodoItem(1, constants.TODO_LIST_ID, "Item not started", datetime.now())
+    doing_item = TodoItem(2, constants.DOING_LIST_ID, "Item in progress", datetime.now())
+    done_item = TodoItem(3, constants.DONE_LIST_ID, "Completed Item!", datetime.now())
     return ViewModel([todo_item, doing_item, done_item])
 
 def test_items_in_done(example_board):

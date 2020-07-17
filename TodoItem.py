@@ -1,14 +1,15 @@
 import constants
 
 class TodoItem:
-    def __init__(self, id, listId, name):
+    def __init__(self, id, listId, name, date_moved):
         self.id = id
         self.status = list_id_to_list_friendly_name(listId)
         self.name = name
+        self.date_moved = date_moved
 
     @classmethod
     def parse_card(cls, card):
-       return cls(card['id'], card['idList'], card['name'])
+       return cls(card['id'], card['idList'], card['name'], card['dateLastActivity'])
 
 def list_id_to_list_friendly_name(list_id):
     if list_id == constants.TODO_LIST_ID:
