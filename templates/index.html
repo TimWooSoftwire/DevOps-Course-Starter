@@ -29,7 +29,6 @@
               </form>
             </li>
           {% endfor %}
-          <!-- List the todo items here -->
         </ul>
       </div>
       <div class="col-sm">
@@ -43,12 +42,12 @@
             </form>
           </li>
           {% endfor %}
-          <!-- List the todo items here -->
         </ul>
       </div>
       <div class="col-sm">
         <h2>Todone</h2> 
         <ul class="list-group mb-4 list-group-flush">
+          {% if view_model.show_all_done_items %}
           {% for item in view_model.items_in_done %}
           <li class="list-group-item">
             <form action="/delete/{{ item.id }}" method="post">
@@ -57,7 +56,31 @@
             </form>
           </li>
           {% endfor %}
-          <!-- List the todo items here -->
+          {% else %}
+          <ul class="list-group mb-4 list-group-flush">
+           {% for item in view_model.recent_done_items %}
+            <li class="list-group-item">
+              <form action="/delete/{{ item.id }}" method="post">
+                <label>{{ item.name }}</label>
+                <input type="submit" class="btn btn-danger" value="Delete">
+              </form>
+            </li>
+            {% endfor %}
+          </ul>
+            <details>
+              <summary>Old Todos</summary>
+              <ul>
+              {% for item in view_model.older_done_items %}
+                <li class="list-group-item">
+                  <form action="/delete/{{ item.id }}" method="post">
+                    <label>{{ item.name }}</label>
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                  </form>
+                </li>
+            {% endfor %}
+              </ul>
+            </details>
+          {% endif %}
         </ul>
       </div>
     </div>

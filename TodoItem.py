@@ -1,11 +1,12 @@
 import constants
+import dateutil.parser
 
 class TodoItem:
     def __init__(self, id, listId, name, date_moved):
         self.id = id
         self.status = list_id_to_list_friendly_name(listId)
         self.name = name
-        self.date_moved = date_moved
+        self.date_moved = dateutil.parser.parse(date_moved)
 
     @classmethod
     def parse_card(cls, card):
@@ -18,4 +19,5 @@ def list_id_to_list_friendly_name(list_id):
         return "Doing"
     if list_id == constants.DONE_LIST_ID:
         return "Done"
+
 
