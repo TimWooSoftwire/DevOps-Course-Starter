@@ -12,7 +12,9 @@ class TodoItem:
 
 def list_id_to_list_friendly_name(list_id):
     if list_id == constants.TODO_LIST_ID:
-        return "Not Started"
+        return "Todo"
+    if list_id == constants.DOING_LIST_ID:
+        return "Doing"
     if list_id == constants.DONE_LIST_ID:
-        return "Complete"
+        return "Done"
 

@@ -25,7 +25,13 @@ class TrelloAPI:
         return id
 
     @staticmethod
-    def complete_item(id):
+    def Move_item_to_done(id):
         request_payload = {**c.DEFAULT_PAYLOAD, **{'idList': c.DONE_LIST_ID}}
+        requests.put(f"{c.BASE_API_URL}/cards/{id}", params=request_payload) 
+        return id
+
+    @staticmethod
+    def move_item_to_doing(id):
+        request_payload = {**c.DEFAULT_PAYLOAD, **{'idList': c.DOING_LIST_ID}}
         requests.put(f"{c.BASE_API_URL}/cards/{id}", params=request_payload) 
         return id

@@ -21,15 +21,13 @@
       <div class="col-sm">
         <h2>Todos</h2>
         <ul class="list-group mb-4 list-group-flush">
-          {% for item in view_model.items %}
-            {% if item.status == "Not Started" %}
-              <li class="list-group-item">
-                <form action="/complete/{{ item.id }}" method="post">
-                  <label>{{ item.name }}</label>
-                  <input type="submit" class="btn btn-success" value="Done!">
-                </form>
-              </li>
-            {% endif %}
+          {% for item in view_model.items_in_todo %}
+            <li class="list-group-item">
+              <form action="/doing/{{ item.id }}" method="post">
+                <label>{{ item.name }}</label>
+                <input type="submit" class="btn btn-warning" value="Start!">
+              </form>
+            </li>
           {% endfor %}
           <!-- List the todo items here -->
         </ul>
@@ -37,15 +35,27 @@
       <div class="col-sm">
         <h2>Todone</h2> 
         <ul class="list-group mb-4 list-group-flush">
-          {% for item in view_model.items %}
-          {% if item.status == "Complete" %}
+          {% for item in view_model.items_in_doing %}
+          <li class="list-group-item">
+            <form action="/done/{{ item.id }}" method="post">
+              <label>{{ item.name }}</label>
+              <input type="submit" class="btn btn-success" value="Done!">
+            </form>
+          </li>
+          {% endfor %}
+          <!-- List the todo items here -->
+        </ul>
+      </div>
+      <div class="col-sm">
+        <h2>Todone</h2> 
+        <ul class="list-group mb-4 list-group-flush">
+          {% for item in view_model.items_in_done %}
           <li class="list-group-item">
             <form action="/delete/{{ item.id }}" method="post">
               <label>{{ item.name }}</label>
               <input type="submit" class="btn btn-danger" value="Delete">
             </form>
           </li>
-          {% endif %}
           {% endfor %}
           <!-- List the todo items here -->
         </ul>

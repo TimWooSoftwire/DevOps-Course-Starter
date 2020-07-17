@@ -17,9 +17,14 @@ def new_todo():
     trello.add_item(title)
     return redirect('/')
 
-@app.route('/complete/<id>', methods=['POST'])
+@app.route('/done/<id>', methods=['POST'])
 def mark_as_complete(id):
-    trello.complete_item(id)
+    trello.Move_item_to_done(id)
+    return redirect('/')
+
+@app.route('/doing/<id>', methods=['POST'])
+def mark_as_doing(id):
+    trello.move_item_to_doing(id)
     return redirect('/')
 
 @app.route('/delete/<id>', methods=['POST'])
