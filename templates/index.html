@@ -21,11 +21,11 @@
       <div class="col-sm">
         <h2>Todos</h2>
         <ul class="list-group mb-4 list-group-flush">
-          {% for todo in todos %}
-            {% if todo.status == "Not Started" %}
+          {% for item in view_model.items %}
+            {% if item.status == "Not Started" %}
               <li class="list-group-item">
-                <form action="/complete/{{ todo.id }}" method="post">
-                  <label>{{ todo.name }}</label>
+                <form action="/complete/{{ item.id }}" method="post">
+                  <label>{{ item.name }}</label>
                   <input type="submit" class="btn btn-success" value="Done!">
                 </form>
               </li>
@@ -37,11 +37,11 @@
       <div class="col-sm">
         <h2>Todone</h2> 
         <ul class="list-group mb-4 list-group-flush">
-          {% for todo in todos %}
-          {% if todo.status == "Complete" %}
+          {% for item in view_model.items %}
+          {% if item.status == "Complete" %}
           <li class="list-group-item">
-            <form action="/delete/{{ todo.id }}" method="post">
-              <label>{{ todo.name }}</label>
+            <form action="/delete/{{ item.id }}" method="post">
+              <label>{{ item.name }}</label>
               <input type="submit" class="btn btn-danger" value="Delete">
             </form>
           </li>
