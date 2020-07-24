@@ -15,7 +15,7 @@ class TrelloAPI:
 
     @staticmethod
     def add_item(name):
-        request_payload = { 'idList': c.TODO_LIST_ID, 'name': name, **c.DEFAULT_PAYLOAD} 
+        request_payload = {'idList': c.TODO_LIST_ID, 'name': name, **c.DEFAULT_PAYLOAD}
         requests.post(f"{c.BASE_API_URL}/cards", params=request_payload) 
         return name
 
@@ -35,3 +35,4 @@ class TrelloAPI:
         request_payload = {**c.DEFAULT_PAYLOAD, **{'idList': c.DOING_LIST_ID}}
         requests.put(f"{c.BASE_API_URL}/cards/{id}", params=request_payload) 
         return id
+

@@ -1,9 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for
 from trello_helper import TrelloAPI as trello
 from view_model import ViewModel
+import constants
+import os
 
 def create_app():
     app = Flask(__name__)
+
+    constants.BOARD_ID = os.environ.get('TRELLO_BOARD_ID')
     
     @app.route('/', methods=['GET'])
     def index():
