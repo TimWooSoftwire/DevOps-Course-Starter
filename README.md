@@ -32,4 +32,16 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 
 ## Secrets
 
-Secrets (a trello API key and Token) are stored in a secrets.py file, and not checked in to git.  
+Secrets (a trello API key and Token) are stored in a secrets.py file, and not checked in to git.  These look like 
+```bash
+TRELLO_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+TRELLO_TOKEN = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+
+## Testing
+
+Unit, integration and end-to-end tests using pylint are available - run then in your favourite IDE. 
+End to end tests will require:
+ * internet connectivity
+ * `geckodriver.exe` to be placed at the root of this repo
+ * update the path to the `geckodriver.exe` in `test_e2e.py` 
