@@ -19,7 +19,7 @@ def create_app():
 
     @app.route('/done/<id>', methods=['POST'])
     def mark_as_complete(id):
-        trello.Move_item_to_done(id)
+        trello.move_item_to_done(id)
         return redirect('/')
 
     @app.route('/doing/<id>', methods=['POST'])
@@ -33,6 +33,7 @@ def create_app():
         return redirect('/')
 
     return app
+
 
 if __name__ == '__main__':
     create_app().run()

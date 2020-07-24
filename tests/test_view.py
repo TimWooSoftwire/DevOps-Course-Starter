@@ -1,9 +1,7 @@
-import sys
+
 import pytest
 from datetime import datetime, timedelta
 
-del sys.path[0]
-sys.path.insert(0, 'C:/Users/TimWoo/Work/Training/DevOpsApprenticeship/ProjectExercise/DevOps-Course-Starter')
 from view_model import ViewModel
 from TodoItem import TodoItem
 import constants

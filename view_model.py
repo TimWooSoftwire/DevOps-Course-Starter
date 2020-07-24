@@ -25,10 +25,10 @@ class ViewModel:
 
     @property
     def recent_done_items(self):
-        return [item for item in self._items if item.date_moved.date() == datetime.today().date()]
+        return [item for item in self.items_in_done if item.date_moved.date() == datetime.today().date()]
 
     @property
     def older_done_items(self):
-        return [item for item in self._items if item.date_moved.date() != datetime.today().date()]
+        return [item for item in self.items_in_done if item.date_moved.date() != datetime.today().date()]
 
     
