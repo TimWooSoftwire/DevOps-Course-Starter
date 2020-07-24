@@ -8,7 +8,11 @@ def create_app():
     app = Flask(__name__)
 
     constants.BOARD_ID = os.environ.get('TRELLO_BOARD_ID')
-    
+    list_ids = trello.get_list_ids(constants.BOARD_ID)
+    constants.TODO_LIST_ID = list_ids[0]
+    constants.DOING_LIST_ID = list_ids[1]
+    constants.DONE_LIST_ID = list_ids[2]
+
     @app.route('/', methods=['GET'])
     def index():
         todos = trello.get_items()

@@ -36,3 +36,10 @@ class TrelloAPI:
         requests.put(f"{c.BASE_API_URL}/cards/{id}", params=request_payload) 
         return id
 
+    @staticmethod
+    def get_list_ids(board_id):
+        request_payload = c.DEFAULT_PAYLOAD
+        r = requests.get(f"{c.BASE_API_URL}/boards/{board_id}/lists", params=request_payload)
+        a = r.json()
+        x = [list['id'] for list in r.json()]
+        return x
