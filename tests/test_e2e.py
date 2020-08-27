@@ -10,7 +10,7 @@ from selenium import webdriver
 
 @pytest.fixture(scope="module")
 def driver():
-    with webdriver.Firefox(r"C:\Users\TimWoo\Work\Training\DevOpsApprenticeship\ProjectExercise\DevOps-Course-Starter") as driver:
+    with webdriver.Firefox() as driver:
         yield driver
 
 
@@ -56,18 +56,25 @@ def test_task_journey(driver, test_app):
     new_todo_submit_button = driver.find_element_by_css_selector("input.btn-primary")
     new_todo_submit_button.click()
 
+    assert "My new Todo" in driver.page_source
+    assert "Start" in driver.page_source
+
     # Move to doing
     move_to_doing_button = driver.find_element_by_css_selector("input.btn-warning")
     move_to_doing_button.click()
+
+    assert "My new Todo" in driver.page_source
+    assert "Done!" in driver.page_source
 
     # Move to done
     move_to_done_button = driver.find_element_by_css_selector("input.btn-success")
     move_to_done_button.click()
 
+    assert "My new Todo" in driver.page_source
+    assert "Delete" in driver.page_source
+
     # Delete
     delete_todo_button = driver.find_element_by_css_selector("input.btn-danger")
     delete_todo_button.click()
 
-    # The existence of the above buttons is enough to show that the card is successfully being created and moving
-    # between columns
-
+    assert "My new Todo" not in driver.page_source

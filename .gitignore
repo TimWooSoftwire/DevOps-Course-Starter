@@ -12,6 +12,9 @@ instance/*
 ### PyCharm ###
 .idea
 
+### Logs ###
+*.log
+
 ### Flask.Python Stack ###
 # Byte-compiled / optimized / DLL files
 __pycache__/

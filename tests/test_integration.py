@@ -2,6 +2,7 @@ import requests
 from dotenv import load_dotenv, find_dotenv
 import pytest
 import app
+import constants
 
 
 @pytest.fixture
@@ -20,11 +21,12 @@ class MockResponse:
     # mock json() method always returns a specific testing dictionary
     @staticmethod
     def json():
+
         x = [
-                {"id": "1", "idList": "5ef48eae04ceb72b492830ef", "name": "ItemInTodo", "dateLastActivity": "2020-07-24T08:05:34.790Z"},
-                {"id": "2", "idList": "5f117c1d6bd68417cc8566c1", "name": "ItemInProgress", "dateLastActivity": "2020-07-24T08:05:34.790Z"},
-                {"id": "3", "idList": "5ef48eb03da6260d87a4e9ab", "name": "ItemCompleted", "dateLastActivity": "2020-07-24T08:05:34.790Z"},
-                {"id": "4", "idList": "5ef48eb03da6260d87a4e9ab", "name": "AncientItemCompleted", "dateLastActivity": "2020-06-24T08:05:34.790Z"}
+                {"id": "1", "idList": constants.TODO_LIST_ID, "name": "ItemInTodo", "dateLastActivity": "2020-07-24T08:05:34.790Z"},
+                {"id": "2", "idList": constants.DOING_LIST_ID, "name": "ItemInProgress", "dateLastActivity": "2020-07-24T08:05:34.790Z"},
+                {"id": "3", "idList": constants.DONE_LIST_ID, "name": "ItemCompleted", "dateLastActivity": "2020-07-24T08:05:34.790Z"},
+                {"id": "4", "idList": constants.DONE_LIST_ID, "name": "AncientItemCompleted", "dateLastActivity": "2020-06-24T08:05:34.790Z"}
             ]
         return x
 
