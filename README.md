@@ -30,6 +30,8 @@ You should see output similar to the following:
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
+There is also a Vagrant option. With vagrant installed, and Windows Hyper-V disabled, run `vagrant up` from the root of this directory. It should do all of the above for you, and after a few minutes the app will be running on `http://localhost:5000/`.
+
 ## Secrets
 
 Secrets (a trello API key and Token) are stored in a secrets.py file, and not checked in to git.  These look like 
