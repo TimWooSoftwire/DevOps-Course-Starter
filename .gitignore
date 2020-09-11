@@ -4,6 +4,12 @@
 ### Secrets ###
 secrets.py
 
+### PyCharm ###
+*.idea
+
+### Vagrant ###
+*.vagrant
+
 ### Flask ###
 instance/*
 !instance/.gitignore
