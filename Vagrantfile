@@ -17,4 +17,11 @@ Vagrant.configure("2") do |config|
     eval "$(pyenv init -)"
     pyenv install 3.7.8
     pyenv global 3.7.8
+    # Install poetry
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+    mv /root/.poetry /home/vagrant/.poetry
+    # Use poetry
+    chmod +x -R /home/vagrant/.poetry/bin
+    echo 'export PATH="/home/vagrant/.poetry/bin:$PATH"' >> /home/vagrant/.profile
+    export PATH="/home/vagrant/.poetry/bin:$PATH"
   end
