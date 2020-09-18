@@ -12,8 +12,6 @@ RUN poetry install
 COPY . /app
 
 EXPOSE 5000
-#ENTRYPOINT ["flask", "run"]
 
-#ENTRYPOINT ["gunicorn", "-c", "./gunicorn.conf.py", "wsgi:app"]
 ENTRYPOINT ["gunicorn", "--config", "gunicorn.conf.py", "wsgi:app"]
 
