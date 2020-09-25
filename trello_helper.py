@@ -15,7 +15,7 @@ class TrelloAPI:
 
     @staticmethod
     def add_item(name):
-        request_payload = { 'idList': c.TODO_LIST_ID, 'name': name, **c.DEFAULT_PAYLOAD} 
+        request_payload = {'idList': c.TODO_LIST_ID, 'name': name, **c.DEFAULT_PAYLOAD}
         requests.post(f"{c.BASE_API_URL}/cards", params=request_payload) 
         return name
 
@@ -25,7 +25,21 @@ class TrelloAPI:
         return id
 
     @staticmethod
-    def complete_item(id):
+    def move_item_to_done(id):
         request_payload = {**c.DEFAULT_PAYLOAD, **{'idList': c.DONE_LIST_ID}}
         requests.put(f"{c.BASE_API_URL}/cards/{id}", params=request_payload) 
         return id
+
+    @staticmethod
+    def move_item_to_doing(id):
+        request_payload = {**c.DEFAULT_PAYLOAD, **{'idList': c.DOING_LIST_ID}}
+        requests.put(f"{c.BASE_API_URL}/cards/{id}", params=request_payload) 
+        return id
+
+    @staticmethod
+    def get_list_ids(board_id):
+        request_payload = c.DEFAULT_PAYLOAD
+        r = requests.get(f"{c.BASE_API_URL}/boards/{board_id}/lists", params=request_payload)
+        a = r.json()
+        x = [list['id'] for list in r.json()]
+        return x

@@ -32,4 +32,18 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 
 ## Secrets
 
-Secrets (a trello API key and Token) are stored in a secrets.py file, and not checked in to git.  
+Secrets (a trello API key and Token) are stored in a secrets.py file, and not checked in to git.  These look like 
+```bash
+TRELLO_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+TRELLO_TOKEN = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+
+## Constants and environment variables
+`constants.py` has some constants in - these all get set automatically. When running for the first time, you will need to create a new trello board, and set the environemnt variable "TRELLO_BOARD_ID" to the id of the new board. 
+The environment variable "DONT_CHECK_FOR_TRELLO_LIST_IDS" is for testing, and should be set to false when running the app.
+
+## Testing
+
+Unit, integration and end-to-end tests using pytest are available - run then in your favourite IDE. 
+End to end tests will require:
+ * internet connectivity
