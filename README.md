@@ -55,14 +55,16 @@ There is also a Vagrant option. With vagrant installed, and Windows Hyper-V disa
 
 There is also a docker option. With Docker Desktop running, use the following commands from the root of this directory to start the app running on port 5000 using gunicorn:
 ```bash
-docker build --target production --tag todo-app:prod
+docker build --target production --tag todo-app:prod . 
 docker run --env-file .env -p 5000:5000 todo-app:prod
 ```
 Or these commands to start a development version using flask's development mode:
 ```bash
-docker build --target production --tag todo-app:prod
-docker run --env-file .env -p 5000:5000 todo-app:prod
+docker build --target production --tag todo-app:dev . 
+docker run --env-file .env -p 5000:5000 -v ${pwd}:/app todo-app:dev
 ```
+Note the volume mount (-v) flag - this means that changes to local files will be present on the container; no rebuild/rerun required. You'll need to add this root directory to the set of directories that docker is allowed to bind - see [this answer](https://stackoverflow.com/a/59984239) for details on how to do this.
+
 
 ## Secrets
 
