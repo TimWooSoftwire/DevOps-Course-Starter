@@ -7,10 +7,21 @@ from threading import Thread
 
 from selenium import webdriver
 
+# Below driver is for running locally
 
-@pytest.fixture(scope="module")
+# @pytest.fixture(scope="module")
+# def driver():
+#     with webdriver.Firefox() as driver:
+#         yield driver
+
+# For running in Docker
+@pytest.fixture(scope='module')
 def driver():
-    with webdriver.Firefox() as driver:
+    opts = webdriver.ChromeOptions()
+    opts.add_argument('--headless')
+    opts.add_argument('--no-sandbox')
+    opts.add_argument('--disable-dev-shm-usage')
+    with webdriver.Chrome('./chromedriver', options=opts) as driver:
         yield driver
 
 

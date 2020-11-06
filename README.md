@@ -80,6 +80,10 @@ The environment variable "DONT_CHECK_FOR_TRELLO_LIST_IDS" is for testing, and sh
 
 ## Testing
 
-Unit, integration and end-to-end tests using pytest are available - run then in your favourite IDE. 
-End to end tests will require:
- * internet connectivity
+Unit and integration and end-to-end tests using pytest are available - run then in your favourite IDE. 
+
+You can run all tests, including end to end tests, using Docker with 
+```bash
+docker build --target test --tag my-test-image .
+docker run my-test-image tests
+```
