@@ -128,4 +128,4 @@ dmypy.json
 env/
 
 ### Configuration files ###
-.env
+.env*
