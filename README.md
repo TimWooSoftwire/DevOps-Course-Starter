@@ -68,10 +68,10 @@ Note the volume mount (-v) flag - this means that changes to local files will be
 
 ## Secrets
 
-Secrets (a trello API key and Token) are stored in a secrets.py file, and not checked in to git.  These look like 
-```bash
-TRELLO_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-TRELLO_TOKEN = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+Secrets (a trello API key and Token) are stored in .env files, and not checked into git. the .env files look like 
+```{bash}
+TRELLO_KEY=""
+TRELLO_TOKEN=""
 ```
 
 ## Constants and environment variables
@@ -81,9 +81,15 @@ The environment variable "DONT_CHECK_FOR_TRELLO_LIST_IDS" is for testing, and sh
 ## Testing
 
 Unit and integration and end-to-end tests using pytest are available - run then in your favourite IDE. 
+For the end to end tests, a different webdriver is needed for running locally vs in Docker - use the correct one in test_e2e.py.
+
 
 You can run all tests, including end to end tests, using Docker with 
 ```bash
 docker build --target test --tag my-test-image .
-docker run my-test-image tests
+docker run --env.file .env.test my-test-image tests
 ```
+
+## CI
+`travis.yml` describes the automated code build that happens whenever a PR is raised. The two `secure` variable are encrypted forms of the trello API key and token. Note that the environment variables are explicitly passed through to Docker with the `-e` flag in the `docker run` command
+
