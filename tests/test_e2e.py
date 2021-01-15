@@ -1,6 +1,7 @@
 import os
 import pytest
 import requests
+from dotenv import load_dotenv, find_dotenv
 import app
 import constants as c
 from threading import Thread
@@ -39,9 +40,15 @@ def delete_trello_board(id):
 
 @pytest.fixture(scope='module')
 def test_app():
+    file_path = find_dotenv('.env.e2e')
+    load_dotenv(file_path, override=True)
+
+    c.TRELLO_KEY = os.environ.get('TRELLO_KEY')
+    c.TRELLO_TOKEN = os.environ.get('TRELLO_TOKEN')
+    c.DEFAULT_PAYLOAD = {'key': c.TRELLO_KEY, 'token': c.TRELLO_TOKEN}
+
     board_id = create_trello_board("test_board")
     os.environ['TRELLO_BOARD_ID'] = board_id
-
     application = app.create_app()
 
     # start the app in its own thread.

@@ -4,6 +4,9 @@
 ### Secrets ###
 secrets.py
 
+### venv ###
+venv
+
 ### PyCharm ###
 *.idea
 
