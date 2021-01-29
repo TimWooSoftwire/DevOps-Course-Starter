@@ -1,16 +1,28 @@
 import os
 import pytest
 import requests
+from dotenv import load_dotenv, find_dotenv
 import app
 import constants as c
 from threading import Thread
 
 from selenium import webdriver
 
+# Below driver is for running locally
 
-@pytest.fixture(scope="module")
+# @pytest.fixture(scope="module")
+# def driver():
+#     with webdriver.Firefox() as driver:
+#         yield driver
+
+# For running in Docker
+@pytest.fixture(scope='module')
 def driver():
-    with webdriver.Firefox() as driver:
+    opts = webdriver.ChromeOptions()
+    opts.add_argument('--headless')
+    opts.add_argument('--no-sandbox')
+    opts.add_argument('--disable-dev-shm-usage')
+    with webdriver.Chrome('./chromedriver', options=opts) as driver:
         yield driver
 
 
@@ -28,9 +40,15 @@ def delete_trello_board(id):
 
 @pytest.fixture(scope='module')
 def test_app():
+    file_path = find_dotenv('.env.e2e')
+    load_dotenv(file_path, override=True)
+
+    c.TRELLO_KEY = os.environ.get('TRELLO_KEY')
+    c.TRELLO_TOKEN = os.environ.get('TRELLO_TOKEN')
+    c.DEFAULT_PAYLOAD = {'key': c.TRELLO_KEY, 'token': c.TRELLO_TOKEN}
+
     board_id = create_trello_board("test_board")
     os.environ['TRELLO_BOARD_ID'] = board_id
-
     application = app.create_app()
 
     # start the app in its own thread.

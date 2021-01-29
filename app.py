@@ -11,13 +11,11 @@ def create_app():
     app = Flask(__name__)
 
     constants.BOARD_ID = os.environ.get('TRELLO_BOARD_ID')
-    dont_check_for_list_ids = os.environ.get('DONT_CHECK_FOR_TRELLO_LIST_IDS')
 
-    if not dont_check_for_list_ids:
-        list_ids = trello.get_list_ids(constants.BOARD_ID)
-        constants.TODO_LIST_ID = list_ids[0]
-        constants.DOING_LIST_ID = list_ids[1]
-        constants.DONE_LIST_ID = list_ids[2]
+    list_ids = trello.get_list_ids(constants.BOARD_ID)
+    constants.TODO_LIST_ID = list_ids[0]
+    constants.DOING_LIST_ID = list_ids[1]
+    constants.DONE_LIST_ID = list_ids[2]
 
     @app.route('/', methods=['GET'])
     def index():

@@ -68,18 +68,31 @@ Note the volume mount (-v) flag - this means that changes to local files will be
 
 ## Secrets
 
-Secrets (a trello API key and Token) are stored in a secrets.py file, and not checked in to git.  These look like 
-```bash
-TRELLO_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-TRELLO_TOKEN = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+Secrets (a trello API key and Token) are stored in .env files, and not checked into git. the .env files look like 
+```{bash}
+TRELLO_KEY=""
+TRELLO_TOKEN=""
 ```
 
 ## Constants and environment variables
 `constants.py` has some constants in - these all get set automatically. When running for the first time, you will need to create a new trello board, and set the environemnt variable "TRELLO_BOARD_ID" to the id of the new board. 
-The environment variable "DONT_CHECK_FOR_TRELLO_LIST_IDS" is for testing, and should be set to false when running the app.
 
 ## Testing
 
-Unit, integration and end-to-end tests using pytest are available - run then in your favourite IDE. 
-End to end tests will require:
- * internet connectivity
+Unit and integration and end-to-end tests using pytest are available - run then in your favourite IDE. 
+For the end to end tests, a different webdriver is needed for running locally vs in Docker - use the correct one in test_e2e.py.
+
+
+You can run all tests, including end to end tests, using Docker with 
+```bash
+docker build --target test --tag my-test-image .
+docker run --env-file .env.e2e my-test-image tests
+```
+
+### Testing environment variables
+The end to end tests want real trello credentials in a `.env.e2e` file - copy the trello credentials from your main `.env` file. The e2e tests will create their own board.
+Note the comment about webdrivers above too!
+
+## CI
+`travis.yml` describes the automated code build that happens whenever a PR is raised. The two `secure` variable are encrypted forms of the trello API key and token. Note that the environment variables are explicitly passed through to Docker with the `-e` flag in the `docker run` command
+
