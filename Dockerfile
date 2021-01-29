@@ -2,6 +2,7 @@ FROM python:3.8.5-buster as base
 
 FROM base as production
 
+ENV PORT=5000
 RUN pip install poetry
 RUN pip install gunicorn
 
@@ -17,7 +18,7 @@ EXPOSE 5000
 
 ENV FLASK_ENV=production
 RUN poetry install --no-dev
-ENTRYPOINT ["gunicorn", "--config", "gunicorn.conf.py", "wsgi:app"]
+CMD gunicorn --bind 0.0.0.0:$PORT wsgi:app
 
 FROM base as development
 
