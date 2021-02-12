@@ -97,4 +97,4 @@ Note the comment about webdrivers above too!
 `travis.yml` describes the automated code build that happens whenever a PR is raised. The two `secure` variable are encrypted forms of the trello API key and token. Note that the environment variables are explicitly passed through to Docker with the `-e` flag in the `docker run` command
 
 ## CD 
-The travis file above will also automatically deploy the app to http://tims-todo-app.herokuapp.com/ when anything is pushed to master; this uses heroku.
+The travis file above will also automatically deploy the app to https://tims-todo-app.herokuapp.com/ when anything is pushed to master; this uses heroku.

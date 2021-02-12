@@ -2,9 +2,8 @@ language: generic
 services:
 - docker
 env:
-  matrix:
-  - FLASK_SKIP_DOTENV=true DOCKER_USERNAME=timwoosoftwire
   global:
+  - FLASK_SKIP_DOTENV=true DOCKER_USERNAME=timwoosoftwire
   - secure: RM0Q/q1+OQivN/Y5Bn1kf/ij/9nV0pLD07KwEYb0qHsOjOw1dFn4qc8UdlbAQoJURRTG/uabhnJhTPq7HuJ7aEPw6Bt01Mv4RrmLSojMCm5kzQazm3lMkVLtNCTyGbMticivtV9SkYEZwbOHRxh0AXSkNOB7XokigHDEVkeXol6QjXViu9AwZ9ax1+PixMmJBM/D2HGd4Fw1UMACuUXRZl+twvyY3XwO84PBXVTiQHqJzVsQgyI6s2gQtIE/4m49i/Vqk+w+/VqkmVYpoDX6j86U+C+JYXcFOYIHVwAHt+MqRj4Zc3rzP41TR3JUA436quDq9fQmRudU+/4qEz2apS9uMpZI9rnxoyC20BaR01UgB79Ot1Z5sBAhqoZWfpTNANGzQIhb2ZdStzM1eANsabqA+zy+pfgQ6+Y5wd6ISYifnJOK7ElCGsiu+bjVhBCR+VkkuMOTAsly+lgiS8CFKf5dfRdgXVlAXDjm6UUfo9blmFLVZOPfVaCOoDCl/Jnd/1WhG+aEh9su8ouKiDknh61FLvc3mHahNFDymdFeqLL5aYZaXIHoW4GHH11knQw9yZ/RXOyz5mnUVFbFQYHqpPcUoUkzUrYoIKyOZRdZ59GsvoCW8c413tE4ELZ9NM1tcgv7zR76ZZlmmGeB7VrELSiB97FLWwoWlVfK2twRZtI=
   - secure: HIr4dH2i/UjOuPwNT1pLhJgtaZMMqUGp08Lm31PcMTv5wKd8BlhCnJeAkewoMWDs8IpgJjOSn1sR7kfq3cpJ5rsU+cliKCZnPfksZsdyQC7aTkmroRIyGb6FrqNS0HNLhMTpZ4GTlZ4Jf4a8cPYb/NcjkDoHm2U+uEsfWbfVQl58elNw7whrmW3tEvoxGy0JCUyqADqVQj8tKqna/ENyKI9ODWT12aRO7+8yJFjujuCnv+PsRlXsmZDArf5H7PTC4fQxc+8RF8TeBZcu8XUmN3IzW6FqJwFJwjrCSEmKdgXxmfv6evKl/6aHDAZ8XH/SP9RsiDwN04PJEQ9USt/q+AH3DX5ZwbocH1DyNHvwXmdL7xTNn48/XjjKBeSjniebPpXF3yNAXLYNbxNntvSuTB6qimFf/8U7G5udEUtN6LdIvOs6CjA+VSFwkLXMVBR/rfhJhrsjkTREQ5E0IRvvgsxZtrP/atTHGIyzBtlhkydZAXOr/NcC23bJ9Xlda+qJB6/oQHanqofmXSFKF3vVnBExU9PDKtVUq6kCkJXZadMq3h11CbntqcmgEJWQBJgqwUmT6sbpXi5NYfmz8tfJeQj3aBeT8F1K3s/Q7+xh7Otr4yLOUp9Fz0Q4dOUK8br96UNbOyKv8+arfFrsuh3/sKjpTR6m/ZNtLPxqtr/c9pA=
   - secure: XpkbKpq0Lev/lGmkPyDxWJT7eaCpYi8SxTow1DwfGRAmmd96Ocx912ANPcPdaA2AUU2cQ3ngSiAmaOSqwtnuRZ+QIyHCgNrrn4pbhZ/Hcnzesn/b6VQtJLbVRrclSF/Z039FpE3gF4ZEwSVXssR+oshNLNfKimZim2ss770wHPPbIhw5D8Rs1Dh2C08zGKnWfi72GpIwNo/A9bszplwM38cIkmY0c+oyWXK9aX6GCe1kzbdgGIxUi5He7L7w08aMhPVweTvACg6cbrYxnvdWgz7GkyVxC+G3pb+SIlTkiyOoIr8JOiwLAj76ekJ07vm2Ma8YJ5FQqFU4HoNUi/iZxfajq47RaInM5C9cK/T9nQ5MP41K71tgTkv/rZhHq5/wNXiENBkv/ZfQ40DQRI1Bwy8XyCoBJ7ZR9orjh34svp7kdpjVtYoX5ucthL94guMo3bKXirL5FucY+WwOR6Xs038CYmk1nsSwmTRa62lAvIcfhqtauvqlWPFJcjTkh3sBMLxa/YRRuzo7neZ/PolCzbz1K8Gfy5LTcENJmitOQr1Kj8Ujp7agi+gxRSWYGipknQTABsoI7y/6QrkSi2uPIQIC9eL0ZonQ49FH6jAQcHLI62/5r1v0XLMo9j+QXZ4W11U9keAts/oL78D1Larli06FEf4NE/uew3uyWREb+mo=
@@ -20,6 +19,9 @@ jobs:
       script: 
         - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
         - docker build --target production --tag timwoosoftwire/to-do-app:$TRAVIS_COMMIT . 
+    - stage: push docker image
+      if: branch = master
+      script:
         - docker tag timwoosoftwire/to-do-app:$TRAVIS_COMMIT timwoosoftwire/to-do-app
         - docker push timwoosoftwire/to-do-app:latest
     - stage: deploy
