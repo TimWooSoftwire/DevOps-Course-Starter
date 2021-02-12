@@ -22,6 +22,8 @@ jobs:
     - stage: push docker image
       if: branch = master
       script:
+        - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+        - docker build --target production --tag timwoosoftwire/to-do-app:$TRAVIS_COMMIT . 
         - docker tag timwoosoftwire/to-do-app:$TRAVIS_COMMIT timwoosoftwire/to-do-app
         - docker push timwoosoftwire/to-do-app:latest
     - stage: deploy
